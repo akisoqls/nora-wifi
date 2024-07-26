@@ -1,7 +1,7 @@
 #include <WiFi.h>
 #include <DNSServer.h>
 
-static const char *ssid = "nora-wifi";
+static const char *ssid = "🍣🍕wi-fi";
 static const char *pwd = "";
 
 WiFiServer server(80);
@@ -39,12 +39,18 @@ void loop() {
           Serial.println(currentLine);
           if (currentLine.length() == 0) {
             
+            String sushiAndPizza[2] = {"🍣", "🍕"};
+            int sushiOrPizza = random(2);
+            String food = sushiAndPizza[sushiOrPizza];
+
             client.println("HTTP/1.1 200 OK");
             client.println("Content-type:text/html");
             client.println();
-            client.println("<!DOCTYPE html><html lang=\"en\"><head><meta charset=\"UTF-8\"><meta name=\"viewport\" content=\"width=device-width, initial-scale=1.0\"><title>nora-wifi</title></head><body>");
+            client.println("<!DOCTYPE html><html lang=\"en\"><head><meta charset=\"UTF-8\"><meta name=\"viewport\" content=\"width=device-width, initial-scale=1.0\"><title>SUPI</title></head><body>");
             client.println("<style>*{margin:0;}p{text-align:center;font-size:20px;line-height:300px;animation:kurukuru 6s infinite ease-in-out;}@keyframes kurukuru{0%{transform:rotate3d(0,1,0,0deg);}100%{transform:rotate3d(0,1,0,360deg);}}</style>");
-            client.println("<p>🛜</p>");
+            client.println("<p>");
+            client.println(food);
+            client.println("</p>");
             client.println("</body></html>");
             client.println();
             client.stop();
